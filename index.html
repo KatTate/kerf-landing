@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KERF — The production system we definitely didn't copy from Fulcrum</title>
+  <meta name="description" content="Kerf is Fulcrum-esque production software for shops that allocate hours, schedule work, and admit the plan always loses a little material." />
+  <meta property="og:title" content="KERF — Precision with inevitable loss" />
+  <meta property="og:description" content="We looked at Fulcrum. We liked Fulcrum. Then legal said no. So we built Kerf." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0b1f1c" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b1f1c'/%3E%3Cpath d='M12 32h40M36 18l14 14-14 14' stroke='%23d6a85a' stroke-width='5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cookie" id="cookie">
+    <p>We use cookies. Also we use your actual production data, which is worse.</p>
+    <button type="button" id="cookie-ok">Fine</button>
+  </div>
+
+  <header class="nav">
+    <a class="brand" href="#top" aria-label="Kerf home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text">KERF</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#pipeline">Pipeline</a>
+      <a href="#features">Features</a>
+      <a href="#compare">Compare</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-small btn-primary" href="#cta">Cut in</a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">
+          <span class="pulse"></span>
+          Production software for people who actually build things
+        </div>
+        <h1>KERF</h1>
+        <p class="hero-tag">The production system we definitely didn't copy from Fulcrum.</p>
+        <p class="hero-sub">
+          We looked at Fulcrum. We liked Fulcrum. Then our lawyers said we couldn't just rename the logo.
+          So we built Kerf: the same energy, fewer lawsuits, and a name that means
+          <em>"the part of the board you throw away."</em>
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#cta">Cut in</a>
+          <a class="btn btn-secondary" href="#tour">See the kerf</a>
+          <button class="btn btn-ghost" type="button" id="talk-sales">Talk to Sales</button>
+        </div>
+        <p class="hero-note" id="sales-note" hidden>No. Talk to production.</p>
+        <div class="hero-badges">
+          <span class="badge">⭐ 4.9/5 from people who have not used it yet</span>
+          <span class="badge">Not affiliated with Fulcrum, Parallax, Excel, or the guy who "just knows."</span>
+        </div>
+      </div>
+
+      <div class="hero-stage" aria-hidden="true">
+        <div class="stage-card">
+          <div class="stage-top">
+            <span>Shop Board</span>
+            <span class="mono">v0.1.0</span>
+          </div>
+          <div class="gantt" id="gantt">
+            <div class="gantt-row"><span>CNC</span><div class="bar bar-a" style="--w:78%"></div></div>
+            <div class="gantt-row"><span>Paint</span><div class="bar bar-b" style="--w:54%"></div></div>
+            <div class="gantt-row"><span>Install</span><div class="bar bar-c" style="--w:36%"></div></div>
+            <div class="gantt-row"><span>QA</span><div class="bar bar-d" style="--w:22%"></div></div>
+            <div class="kerf-blade" id="kerf-blade"></div>
+          </div>
+          <p class="stage-caption">accuracy, with material loss.</p>
+          <div class="inspiration" title="do not ship">// inspiration layer (do not ship)</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="value-strip">
+      <div class="value-card">
+        <h3>Allocate hours</h3>
+        <p class="value-fake">AI-native resource orchestration for modern makerspaces.</p>
+        <p class="value-real">Like Fulcrum, but we said the quiet part out loud.</p>
+      </div>
+      <div class="value-card">
+        <h3>Schedule production</h3>
+        <p class="value-fake">Drag-and-drop capacity planning with delightful UX.</p>
+        <p class="value-real">Drag people onto jobs until someone cries or the EHR looks good.</p>
+      </div>
+      <div class="value-card">
+        <h3>Close the loop</h3>
+        <p class="value-fake">Real-time visibility across your value stream.</p>
+        <p class="value-real">Finally know whether "80% complete" means 80% or "I walked by the shop."</p>
+      </div>
+    </section>
+
+    <section class="section" id="pipeline">
+      <div class="section-head">
+        <p class="kicker">The honest funnel</p>
+        <h2>Pricing → Production without the prayer circle</h2>
+        <p class="lede">Noah's actual pipeline, dressed as marketing. CRM flirts. Projects commits. Kerf does the labor.</p>
+      </div>
+      <ol class="pipeline">
+        <li><strong>CRM opportunity</strong><span>Somebody wants a thing</span></li>
+        <li><strong>Budget range</strong><span>Fantasy money becomes real money</span></li>
+        <li><strong>Quick quote</strong><span>Fast and slightly dangerous</span></li>
+        <li><strong>Hard quote</strong><span>Now we're responsible</span></li>
+        <li><strong>Shaping</strong><span>Parallax energy, fewer gaps</span></li>
+        <li class="pipeline-kerf"><strong>KERF</strong><span>Allocate / schedule / build</span></li>
+        <li><strong>Hours hit departments</strong><span>Service vs material, no identity crisis</span></li>
+        <li><strong>Somebody makes the thing</strong><span>The only KPI that matters</span></li>
+      </ol>
+      <p class="punchline">We call it a funnel. Your estimators call it Tuesday.</p>
+    </section>
+
+    <section class="section features" id="features">
+      <div class="section-head">
+        <p class="kicker">Features</p>
+        <h2>Three things that actually matter</h2>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature">
+          <div class="feature-label">01 / EHR Truth</div>
+          <h3>Estimated vs Actual, but make it fashion</h3>
+          <p>Kerf doesn't hide bad EHR. It frames it. Like a museum of decisions.</p>
+          <div class="ehr-board">
+            <div class="ehr-card">
+              <span>Target EHR</span>
+              <strong id="target-ehr">$187</strong>
+            </div>
+            <div class="ehr-card ehr-actual">
+              <span>Actual EHR</span>
+              <strong id="actual-ehr">$91</strong>
+              <em class="confetti-label">LEARNING OPPORTUNITY</em>
+            </div>
+          </div>
+        </article>
+
+        <article class="feature">
+          <div class="feature-label">02 / Line Identity</div>
+          <h3>Service revenue vs material revenue</h3>
+          <p>Toggle the truth. When you mix them wrong, Kerf refuses to gaslight finance.</p>
+          <div class="toggle-wrap">
+            <button class="toggle active" type="button" data-mode="service" id="mode-service">Service <span>people icons</span></button>
+            <button class="toggle" type="button" data-mode="material" id="mode-material">Material <span>sheet goods</span></button>
+          </div>
+          <div class="mode-panel" id="mode-panel">
+            <div class="mode-icons" id="mode-icons">👷 👷 👷 👷</div>
+            <p id="mode-text">Hours that walk, talk, and burn PTO.</p>
+          </div>
+          <div class="toast" id="toast" hidden>Line item identity crisis detected. Was this a person or a panel?</div>
+        </article>
+
+        <article class="feature feature-wide">
+          <div class="feature-label">03 / Anti-ERP manifesto (in ERP clothing)</div>
+          <h3>Classic ERP sins Kerf "solves"</h3>
+          <ul class="sin-list">
+            <li><span class="box">☐</span> 47 modules you'll never open</li>
+            <li><span class="box">☐</span> Implementation measured in fiscal years</li>
+            <li><span class="box">☐</span> A consultant named Brad who bills in feelings</li>
+            <li><span class="box">☐</span> Training binder thicker than the product</li>
+            <li><span class="box">☐</span> "Go-live" that is neither go nor live</li>
+            <li class="sin-win"><span class="box">☑</span> One app that schedules the shop and admits it's a little bit stolen</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section compare" id="compare">
+      <div class="section-head">
+        <p class="kicker">Stolen from / Fixed from</p>
+        <h2>Compare to Fulcrum</h2>
+        <p class="lede">A one-row table energy product page, expanded just enough to be useful.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Them</th>
+              <th>Us</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Hour allocation</td><td>yes</td><td>yes but we said it</td></tr>
+            <tr><td>Production scheduling</td><td>yes</td><td>yes but we said it</td></tr>
+            <tr><td>Feedback loops</td><td>yes</td><td>yes but we said it</td></tr>
+            <tr><td>Shop-floor honesty</td><td>implied</td><td><strong>brand promise</strong></td></tr>
+            <tr><td>Parallax gap therapy</td><td>n/a</td><td>included</td></tr>
+            <tr><td>Excel war crimes amnesty</td><td>no</td><td>conditional</td></tr>
+            <tr><td>Willingness to admit the ripoff</td><td>no</td><td><strong>core competency</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="source-cards">
+        <article>
+          <h4>Fulcrum loves</h4>
+          <p>Closed loops. Production reality. The feeling that the floor and the plan might someday meet.</p>
+        </article>
+        <article>
+          <h4>Parallax gaps</h4>
+          <p>Sold / planned / projected rates with safeguards against "optimistic editing."</p>
+        </article>
+        <article>
+          <h4>Excel crimes</h4>
+          <p>If your production system lives in a tab named FINAL_v7_USE_THIS, Kerf is your plea deal.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section roadmap" id="tour">
+      <div class="section-head">
+        <p class="kicker">Roadmap strip</p>
+        <h2>Where this actually is</h2>
+      </div>
+      <div class="roadmap-grid">
+        <article>
+          <div class="meter"><span style="--p:90%"></span></div>
+          <h3>Projects</h3>
+          <p>Probably 90% to MVP. Big hurdle cleared. Flat structure, CRM-connected, AI-assisted entries.</p>
+        </article>
+        <article>
+          <div class="meter"><span style="--p:70%"></span></div>
+          <h3>Pricing (not "quoting"!!)</h3>
+          <p>Budget ranges, quick quote, hard quote, service vs material, department hours, target EHR.</p>
+        </article>
+        <article>
+          <div class="meter"><span style="--p:25%"></span></div>
+          <h3>Kerf</h3>
+          <p>Josue's production app. Conversations start when he's back from vacation. Nickname: already elite.</p>
+        </article>
+      </div>
+      <p class="roadmap-note">Source: Noah Fakeri, Week 8 Update · Vertec × Katalyst ODE implementation</p>
+    </section>
+
+    <section class="section quotes">
+      <div class="section-head">
+        <p class="kicker">Social proof</p>
+        <h2>Trusted by us, our future selves, and whoever sits next to Josue</h2>
+      </div>
+      <div class="quote-track" id="quote-track">
+        <figure class="quote active">
+          <blockquote>"It's like Fulcrum had a baby with our pain."</blockquote>
+          <figcaption>— Production, probably</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>"I asked where the hours went. Kerf showed me. I preferred not knowing."</blockquote>
+          <figcaption>— Finance</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>"We almost called it Fulcrum 2: Electric Boogaloo."</blockquote>
+          <figcaption>— Legal (vetoed)</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>"Projects is 90% MVP. Kerf is 90% nickname. Ship it."</blockquote>
+          <figcaption>— Noah, Week 8</figcaption>
+        </figure>
+      </div>
+      <div class="quote-dots" id="quote-dots" aria-hidden="true"></div>
+      <div class="logo-wall">
+        <span>Katalyst</span>
+        <span>Vertec</span>
+        <span>ODE</span>
+        <span>Shop Floor</span>
+        <span>Future Tate</span>
+      </div>
+    </section>
+
+    <section class="section pricing" id="pricing">
+      <div class="section-head">
+        <p class="kicker">Pricing page energy</p>
+        <h2>Plans for every stage of denial</h2>
+      </div>
+      <div class="price-grid">
+        <article class="price-card">
+          <h3>Starter</h3>
+          <p class="price">Free<span>*</span></p>
+          <ul>
+            <li>1 shop</li>
+            <li>Spreadsheet export</li>
+            <li>"Quick quote"</li>
+            <li>Status page (always green)</li>
+          </ul>
+          <a class="btn btn-secondary" href="#cta">Start Free Trial</a>
+          <p class="price-fine">*Free like "we already paid Vertec."</p>
+        </article>
+        <article class="price-card featured">
+          <div class="popular">Most honest</div>
+          <h3>Professional</h3>
+          <p class="price">$$$</p>
+          <ul>
+            <li>1 shop that pretends it's 3</li>
+            <li>Spreadsheet <em>import</em> (the real feature)</li>
+            <li>"Hard quote"</li>
+            <li>EHR museum access</li>
+          </ul>
+          <a class="btn btn-primary" href="#cta">Book a Demo</a>
+          <p class="price-fine">Demo slots available Q4 2029.</p>
+        </article>
+        <article class="price-card">
+          <h3>Enterprise</h3>
+          <p class="price">$$$$ + goat</p>
+          <ul>
+            <li>Infinite shops, finite sanity</li>
+            <li>Brad included</li>
+            <li>Quote that becomes a project whether you're ready or not</li>
+            <li>Dedicated kerf manager</li>
+          </ul>
+          <a class="btn btn-secondary" href="#cta">Talk to production</a>
+          <p class="price-fine">Goat not pictured. Goat is metaphorical. Probably.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section faq" id="faq">
+      <div class="section-head">
+        <p class="kicker">FAQ</p>
+        <h2>Weaponized questions</h2>
+      </div>
+      <div class="faq-list">
+        <details open>
+          <summary>Is this just Fulcrum?</summary>
+          <p>Spiritually yes. Legally no. Emotionally it's complicated.</p>
+        </details>
+        <details>
+          <summary>Why Kerf?</summary>
+          <p>Because every production plan has waste. We named the product after the honesty.</p>
+        </details>
+        <details>
+          <summary>Does it replace Parallax?</summary>
+          <p>It replaces the part of Parallax where the numbers and the floor diverge and everyone blames the weather.</p>
+        </details>
+        <details>
+          <summary>Can it integrate with Odoo?</summary>
+          <p>It <em>is</em> the production end of the Odoo love story. CRM flirts, Projects commits, Kerf does the labor.</p>
+        </details>
+        <details>
+          <summary>When is it done?</summary>
+          <p>Josue is back from vacation. That's the roadmap.</p>
+        </details>
+        <details>
+          <summary>Will this have a status page?</summary>
+          <p>Yes. It will be green while the shop is on fire. Tradition.</p>
+        </details>
+        <details>
+          <summary>Can I get merch that says Get Kerfed?</summary>
+          <p>Internal only. HR has feelings. Legal has more feelings.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="section tags">
+      <div class="section-head">
+        <p class="kicker">Taglines</p>
+        <h2>Pick your fighter</h2>
+      </div>
+      <div class="tag-cloud">
+        <span>Precision with inevitable loss.</span>
+        <span>We took a little off Fulcrum.</span>
+        <span>Production software that knows what a shop floor is.</span>
+        <span>Allocate hours. Absorb waste. Repeat.</span>
+        <span>The cut between the plan and the part.</span>
+        <span>Mind the Kerf.</span>
+        <span>Operating system for people who actually build things.</span>
+      </div>
+    </section>
+
+    <section class="cta" id="cta">
+      <div class="cta-inner">
+        <p class="kicker light">Final band</p>
+        <h2>Stop managing production like it's folklore.</h2>
+        <p class="cta-sub">By clicking, you agree that all ERPs are a little bit cargo cult and that's fine if the hours land in the right department.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="mailto:tate@katgroupinc.com?subject=Kerf%20-%20Cut%20in">Cut in</a>
+          <a class="btn btn-secondary" href="#tour">See the kerf</a>
+          <a class="btn btn-ghost light" href="#compare">Compare to Fulcrum</a>
+        </div>
+        <p class="changelog">Changelog #1 — <code>v0.1.0 — Renamed from DefinitelyNotFulcrum</code></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>
+      <strong>KERF</strong>
+      <span>A loving roast of Fulcrum, ERPs, and software landing pages.</span>
+    </div>
+    <div class="footer-links">
+      <a href="404.html">404</a>
+      <a href="careers.html">Careers</a>
+      <a href="#faq">Legal feelings</a>
+    </div>
+    <p class="footer-note">Built for Katalyst internal launch energy. Not a real SaaS signup. Yet.</p>
+  </footer>
+
+  <aside class="chat" id="chat" aria-label="Chat widget parody">
+    <button type="button" id="chat-toggle" aria-expanded="false">Chat</button>
+    <div class="chat-panel" id="chat-panel" hidden>
+      <header>Kerf Concierge</header>
+      <p>No.</p>
+    </div>
+  </aside>
+
+  <script src="script.js"></script>
+</body>
+</html>
